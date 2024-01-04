@@ -1,0 +1,14 @@
+# Start tmux always
+[[ $TERM != "screen" ]] && exec tmux
+
+# Commands
+alias c_ccx='clang++'
+
+# Directories
+alias __notes="~/Documents/notes"
+alias __scripts="~/src/scripts"
+alias __papers="~/Documents/papers"
+alias __archive="~/Documents/archive/"
+
+# Paths
+export PATH=$PATH:~/src/scripts/
