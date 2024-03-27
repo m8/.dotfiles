@@ -21,3 +21,6 @@ export PATH=$PATH:~/src/scripts/
 # Save home directory
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
+# Set editor
+export EDITOR=nvim
