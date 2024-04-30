@@ -1,0 +1,14 @@
+#!/bin/bash
+for file in "$@"; do
+    if [ "${file##*.}" == "pdf" ]; then
+        output_file="${file%.*}.opt.pdf"
+        gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$file"
+        if [ $? -eq 0 ]; then
+            echo "Optimized $file to $output_file"
+        else
+            echo "Error optimizing $file"
+        fi
+    else
+        echo "Skipping non-PDF file: $file"
+    fi
+done
