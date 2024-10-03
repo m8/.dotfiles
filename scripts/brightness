@@ -1,0 +1,82 @@
+#!/usr/bin/python3
+
+import subprocess
+
+# Detect available displays using ddcutil
+def detect_displays():
+    try:
+        result = subprocess.run(['sudo', 'ddcutil', 'detect'], stdout=subprocess.PIPE, text=True)
+        return result.stdout
+    except Exception as e:
+        print(f"Error detecting displays: {e}")
+        return None
+
+# Get the current brightness of a specific display
+def get_brightness(display_number):
+    try:
+        result = subprocess.run(['sudo', 'ddcutil', '-d', str(display_number), 'getvcp', '10'],
+                                stdout=subprocess.PIPE, text=True)
+        for line in result.stdout.splitlines():
+            if "Brightness" in line:
+                current_value = int(line.split('=')[1].strip().split(",")[0])
+                return current_value
+        return None
+    except Exception as e:
+        print(f"Error getting brightness: {e}")
+        return None
+
+# Set the brightness of a specific display
+def set_brightness(display_number, value):
+    try:
+        if 0 <= value <= 100:
+            subprocess.run(['sudo', 'ddcutil', '-d', str(display_number), 'setvcp', '10', str(value)])
+            print(f"Brightness set to {value}% on display {display_number}")
+        else:
+            print("Brightness value must be between 0 and 100")
+    except Exception as e:
+        print(f"Error setting brightness: {e}")
+
+# Main logic
+def main():
+    # Step 1: Detect available displays
+    print("Detecting displays...")
+    displays_info = detect_displays()
+    if displays_info is None:
+        return
+
+    print("Available displays:")
+    print(displays_info)
+
+    # Step 2: Ask the user to select a display
+    try:
+        display_number = int(input("Enter the display number (e.g., 1 for Display 1, 2 for Display 2): "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
+
+    # Step 3: Show the current brightness
+    current_brightness = get_brightness(display_number)
+    if current_brightness is not None:
+        print(f"Current brightness of display {display_number}: {current_brightness}%")
+    else:
+        print("Could not retrieve current brightness.")
+
+    # Step 4: Loop to continuously ask for brightness until interrupted
+    try:
+        while True:
+            # Ask the user for the new brightness value
+            try:
+                new_brightness = int(input("Enter the new brightness value (0-100): "))
+            except ValueError:
+                print("Invalid input. Please enter a number between 0 and 100.")
+                continue
+
+            # Set the new brightness
+            set_brightness(display_number, new_brightness)
+            
+    except KeyboardInterrupt:
+        print("\nExiting program. Goodbye!")
+
+if __name__ == "__main__":
+    main()
+
