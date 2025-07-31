@@ -10,7 +10,7 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 44, 52, 0.8);
+    background-color: #383838;
     color: #ffffff;
     transition: background-color 0.5s;
 }
@@ -35,7 +35,7 @@ window#waybar.hidden {
     font-weight: bold;
     color: #ffffff;
     background: #536067;
-    padding: 5px 10px;
+    padding: 10px 10px;
     border-radius: 4px;
 }
 
@@ -51,13 +51,10 @@ window#waybar.hidden {
 #keyboard-state,
 #scratchpad {
     padding: 5px 8px;
-    background-color: #3b3f51;
+    background-color: #383838;
     color: #ffffff;
 }
 
-#battery.charging{
-    background-color: #b5b4e2;
-}
 
 #battery.critical:not(.charging) {
     background-color: #b54f4f;
@@ -81,8 +78,9 @@ window#waybar.hidden {
 }
 
 #tray {
-    background-color: #b5b4e2;
-    color: #282a36;
+    background-color: #383838;
+    color: #ffffff;
+    padding: 10px;
 }
 
 #tray>.passive {

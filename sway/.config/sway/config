@@ -1,7 +1,19 @@
 # 🧩 Includes & Defaults
-include /etc/sway/config.d/*
-default_border pixel 5px
+default_border pixel 2px
 font monolike 14px
+
+# == app configs ==
+# slack
+exec_always sh -c 'pgrep -x slack >/dev/null || slack'
+for_window [class="Slack" instance="slack"] move container to workspace number 5
+# 🪟 Window Behavior Rules
+for_window [app_id="^launcher$"] floating enable, sticky enable
+for_window [app_id="^pavucontrol$"] floating enable, sticky enable
+for_window [app_id="blueman-manager"] floating enable, sticky enable
+for_window [app_id="galculator"] floating enable
+
+# notification manager
+exec_always --no-startup-id swaync
 
 # ⌨️  Mod + Keybindings
 set $mod Mod4
@@ -10,15 +22,10 @@ set $down n
 set $up p
 set $right f
 
+
 set $term alacritty
 set $menu exec wofi --show drun
 set $gnome-schema org.gnome.desktop.interface
-
-# 🪟 Window Behavior Rules
-for_window [app_id="^launcher$"] floating enable, sticky enable
-for_window [app_id="^pavucontrol$"] floating enable, sticky enable
-for_window [app_id="blueman-manager"] floating enable, sticky enable
-for_window [app_id="galculator"] floating enable
 
 # 🖼️  Display & Wallpaper
 # output * bg ~/Pictures/Wallpapers/dracula.png center
@@ -26,15 +33,15 @@ exec_always kanshi
 bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
 
-
-
-# 🌙 Idle Behavior
+# Idle Behavior and locking
 exec swayidle -w \
      timeout 600 'swaylock-dracula' \
      timeout 605 'swaymsg "output * dpms off"' \
      resume 'swaymsg "output * dpms on"' \
      before-sleep 'swaylock-dracula' \
      before-sleep 'playerctl pause'
+bindsym $mod+l exec swaylock -f && sleep 2 && systemctl suspend
+
 
 # ⌨️ Input Devices
 input "keyboard" {
@@ -154,20 +161,18 @@ bar {
 }
 
 exec_always {
-  gsettings set $gnome-schema gtk-theme 'Dracula'
-  gsettings set $gnome-schema icon-theme 'candy-icons'
-  gsettings set $gnome-schema cursor-theme 'capitaine-cursors-light'
-  gsettings set $gnome-schema font-name 'monolike 10'
+  gsettings set $gnome-schema gtk-theme 'Yaru-blue-dark'
+  gsettings set $gnome-schema icon-theme 'Yaru-blue-dark'
+  gsettings set $gnome-schema cursor-theme 'Yaru'
+  gsettings set $gnome-schema font-name 'Ubuntu 11'
 }
 
 # 🛠️ Services & Extras
-exec --no-startup-id fcitx5 -d
 exec_always ~/.local/bin/sway-suspend-watcher
 exec nm-applet --indicator
 exec blueman-applet
 
-
+include ~/.config/sway/config.d/*
 
 # 🔔 Notifications
-bindsym $mod+Shift+i exec swaync-client -t -sw
 bindsym $mod+i exec swaync-client -t

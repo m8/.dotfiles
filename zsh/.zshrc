@@ -78,3 +78,4 @@ fi
 CURSOR=DMZ-White
 
 source $HOME/.profile
+export PATH=~/.npm-global/bin:$PATH
