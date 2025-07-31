@@ -1,0 +1,38 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "gtk-layer-shell": true,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "pulseaudio", "battery",
+    
+	"pulseaudio": {
+		"format": "{icon}",
+		"format-bluetooth": "{icon}",
+		"format-muted": " ",
+		"format-icons": {
+			"headphones": " ",
+			"default": [" ", " ", " "]
+		},
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"tooltip-format": "{volume:2}%"
+	},
+
+"network": {
+    "format-wifi": "{essid}",
+    "on-click": "nm-connection-editor"
+},
+"clock": {
+    "format": "{:%H:%M}",
+    "on-click": "gnome-calendar"
+},
+	"battery": {
+		"format": "{icon}",
+		"format-icons": {
+			"default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+			"charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+			"full": "󰂅"
+		}
+	},
+}

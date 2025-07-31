@@ -16,3 +16,12 @@ set autoindent expandtab tabstop=4 shiftwidth=4
 set clipboard=unnamedplus
 
 highlight Comment ctermfg=green
+
+call plug#begin('~/.vim/plugged')
+
+" Add fzf and fzf.vim plugins
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
