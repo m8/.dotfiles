@@ -11,6 +11,7 @@ soft_packages=(
     vlc \               # Video player
     pandoc \            # Document converter
     gufw \              # Firewall
+<<<<<<< Updated upstream
     gnome-calculator \  # Calculator
     ncdu \              # Disk usage analyzer
     gvfs-backends \     # File transfer
@@ -19,6 +20,16 @@ soft_packages=(
 dev_packages=(
 	zsh \
     	gcc \
+=======
+    grsync \            # Backup
+    gparted \           # Partition editor
+    ncdu \              # Disk usage analyzer
+)
+
+dev_packages=(
+    zsh \
+    gcc \
+>>>>>>> Stashed changes
     g++ \
     cmake \
     build-essential \
@@ -35,7 +46,6 @@ dev_packages=(
 sudo apt-get install ${soft_packages[@]}
 sudo apt-get install ${dev_packages[@]}
 sudo apt-get autoremove
-
 # Install oh-my-zsh
 if [[ ! -d ~/.oh-my-zsh ]]; then
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -61,4 +71,7 @@ code --install-extension ${extensions[@]}
 wget https://zoom.us/client/latest/zoom_amd64.deb -O /tmp/zoom_amd64.deb
 sudo apt install /tmp/zoom_amd64.deb
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
