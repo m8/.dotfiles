@@ -32,24 +32,21 @@ set $menu exec wofi --show drun
 set $gnome-schema org.gnome.desktop.interface
 
 # 🖼️  Display & Wallpaper
-# output * bg ~/Pictures/Wallpapers/dracula.png clenter
-exec_always kanshi
+output * bg ~/.dotfiles/bg.jpeg fill 
 bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
 
 # Idle Behavior and locking
 exec swayidle -w \
-     timeout 600 'swaylock-dracula' \
-     timeout 605 'swaymsg "output * dpms off"' \
-     resume 'swaymsg "output * dpms on"' \
-     before-sleep 'swaylock-dracula' \
-     before-sleep 'playerctl pause'
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 # bindsym $mod+Shift+l exec swaylock -f && sleep 2 && systemctl suspend
 
 
 # ⌨️ Input Devices
 input "keyboard" {
-  xkb_layout tr
+  xkb_layout us
   xkb_variant intl
 }
 
