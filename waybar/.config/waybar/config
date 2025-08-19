@@ -15,11 +15,27 @@
         "backlight",
         "pulseaudio",
         "battery",
-        "idle_inhibitor",
+	"power-profiles-daemon",
+    	"custom/screenshot",
+	"idle_inhibitor",
         "tray",
         "custom/power",
     ],
-    "custom/power": {
+
+
+"power-profiles-daemon": {
+  "format": "ABC",
+  "tooltip-format": "Power profile: {profile}nDriver: {driver}",
+  "tooltip": true,
+  "format-icons": {
+    "default": "A",
+    "performance": "B",
+    "balanced": "C",
+    "power-saver": "D"
+  }
+},
+
+	"custom/power": {
         "format": "⏻",
         "tooltip-format": "power manager",
         "on-click": "swaynag -t warning -m 'Power Menu Options' -z 'Shutdown' 'shutdown -h now' -z 'Restart' 'shutdown -r now' -z 'Logout' 'swaymsg exit' -z 'Suspend' 'systemctl suspend' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
@@ -52,6 +68,13 @@
         "escape": true
     },
 
+"custom/screenshot": {
+    "format": " ",
+    "icon-size": 10,
+    "tooltip": "Take screenshot",
+    "on-click": "XDG_CURRENT_DESKTOP=Sway flameshot gui" 
+},
+
     "cpu": {
         "interval": 3,
         "format": "CPU: {usage}%",
@@ -78,13 +101,14 @@
         "format-icons": ["", "", "", "", ""]
     },
 
-    "network": {
-        "format-wifi": " {essid}",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠"
-    },
+    "power-profiles-daemon": {
+    "format": "asd {profile}",
+    "format-icons": {
+        "performance": "aa",
+        "balanced": "",
+        "power-saver": ""
+    }
+},
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
