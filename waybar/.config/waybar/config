@@ -12,28 +12,64 @@
         "custom/swaync",
     ],
     "modules-right": [
+        "privacy",
         "backlight",
         "pulseaudio",
         "battery",
-	"power-profiles-daemon",
+	    "power-profiles-daemon",
     	"custom/screenshot",
-	"idle_inhibitor",
+	    "idle_inhibitor",
         "tray",
         "custom/power",
     ],
 
-
-"power-profiles-daemon": {
-  "format": "ABC",
-  "tooltip-format": "Power profile: {profile}nDriver: {driver}",
-  "tooltip": true,
-  "format-icons": {
-    "default": "A",
-    "performance": "B",
-    "balanced": "C",
-    "power-saver": "D"
-  }
+"privacy": {
+	"icon-spacing": 4,
+	"icon-size": 18,
+	"transition-duration": 250,
+	"modules": [
+		{
+			"type": "screenshare",
+			"tooltip": true,
+			"tooltip-icon-size": 24
+		},
+		{
+			"type": "audio-out",
+			"tooltip": true,
+			"tooltip-icon-size": 24
+		},
+		{
+			"type": "audio-in",
+			"tooltip": true,
+			"tooltip-icon-size": 24
+		}
+	],
+	"ignore-monitor": true,
+	"ignore": [
+		{
+			"type": "audio-in",
+			"name": "cava"
+		},
+		{
+			"type": "screenshare",
+			"name": "obs"
+		}
+	]
 },
+
+
+
+    "power-profiles-daemon": {
+        "format": " {icon}   ",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },    
 
 	"custom/power": {
         "format": "⏻",
@@ -100,15 +136,6 @@
         "format-charging": "⚡ {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
-
-    "power-profiles-daemon": {
-    "format": "asd {profile}",
-    "format-icons": {
-        "performance": "aa",
-        "balanced": "",
-        "power-saver": ""
-    }
-},
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
