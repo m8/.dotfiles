@@ -23,7 +23,7 @@ for_window [class="Slack" instance="slack"] move container to workspace number 5
 for_window [class="obsidian" instance="obsidian"] move container to workspace number 3
 for_window [instance="chromium"] move container to workspace number 1
 
-exec --no-startup-id /bin/sh -c 'eval $(/usr/bin/gnome-keyring-daemon --start --components=secrets); export SSH_AUTH_SOCK'
+exec --no-startup-id /bin/sh -c 'eval $(/usr/bin/gnome-keyring-daemon --start --components=secrets,ssh,gpg); export SSH_AUTH_SOCK'
 # notification manager
 exec_always --no-startup-id swaync
 
@@ -51,7 +51,7 @@ bindswitch --reload --locked lid:off output eDP-1 enable
 
 # Idle Behavior and lockin
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 # bindsym $mod+Shift+l exec swaylock -f && sleep 2 && systemctl suspend
@@ -193,3 +193,4 @@ exec_always --no-startup-id notify-send "config reloaded" "config reloaded"
 
 # 🔔 Notifications
 bindsym $mod+i exec swaync-client -t
+
